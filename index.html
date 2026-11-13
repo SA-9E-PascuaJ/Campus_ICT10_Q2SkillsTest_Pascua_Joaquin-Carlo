@@ -10,22 +10,152 @@
   <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 
   <style>
-    body { font-family: Arial, sans-serif; max-width: 400px; margin: 40px auto; padding: 0 16px; }
-    input, button { font-size: 1rem; padding: 8px; }
-    #result { margin-top: 20px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: #ffffff;
+      color: #0f293a;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      padding: 40px 32px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #0b2538;
+      margin-bottom: 20px;
+    }
+
+    .icon-container {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    p.subtitle {
+      font-size: 0.95rem;
+      color: #1e293b;
+      margin-bottom: 24px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    input {
+      flex: 1;
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0f172a;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input::placeholder {
+      color: #64748b;
+    }
+
+    input:focus {
+      border-color: #0c4a6e;
+    }
+
+    button {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 999px;
+      background: #0c4a6e;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    button:hover {
+      background: #073652;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    #result {
+      padding: 28px 20px;
+      border-radius: 8px;
+      background: #f0f8fc;
+      border: 1.5px dashed #bae0f3;
+      color: #1e293b;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      min-height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Shows placeholder text inside the result box until Python puts text inside it */
+    #result:empty::before {
+      content: "Results will appear here.";
+      color: #334155;
+    }
   </style>
 </head>
 <body>
-  <h1>Non-Metal Element Finder</h1>
+  <div class="card">
+    <h1>Non-Metal Element Finder</h1>
 
-  <!-- ts is where you type the symbol -->
-  <input id="symbol" type="text" placeholder="Enter symbol (ex: O)">
+    <!-- Simple SVG molecule icon -->
+    <div class="icon-container">
+      <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="40" x2="20" y2="20" stroke="#0c4a6e" stroke-width="5" stroke-linecap="round"/>
+        <line x1="40" y1="40" x2="62" y2="18" stroke="#0c4a6e" stroke-width="5" stroke-linecap="round"/>
+        <line x1="40" y1="40" x2="18" y2="62" stroke="#0c4a6e" stroke-width="5" stroke-linecap="round"/>
+        <line x1="40" y1="40" x2="62" y2="60" stroke="#0c4a6e" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="40" cy="40" r="11" fill="#2b8cbe" stroke="#0c4a6e" stroke-width="3"/>
+        <circle cx="20" cy="20" r="7.5" fill="#0c4a6e"/>
+        <circle cx="62" cy="18" r="7.5" fill="#67c7d4" stroke="#0c4a6e" stroke-width="2.5"/>
+        <circle cx="18" cy="62" r="7.5" fill="#67c7d4" stroke="#0c4a6e" stroke-width="2.5"/>
+        <circle cx="62" cy="60" r="7.5" fill="#67c7d4" stroke="#0c4a6e" stroke-width="2.5"/>
+      </svg>
+    </div>
 
-  <!-- ts calls the search function in main.py -->
-  <button py-click="search">Search</button>
+    <p class="subtitle">Discover properties of non-metallic elements by symbol.</p>
 
-  <!-- ts is where the answer shows up -->
-  <div id="result"></div>
+    <div class="search-box">
+      <!-- ts is where you type the symbol -->
+      <input id="symbol" type="text" placeholder="Enter symbol (ex: O)">
+
+      <!-- ts calls the search function in main.py -->
+      <button py-click="search">Search</button>
+    </div>
+
+    <!-- ts is where the answer shows up -->
+    <div id="result"></div>
+  </div>
 
   <!-- ts connects the python file -->
   <script type="py" src="./main.py"></script>
