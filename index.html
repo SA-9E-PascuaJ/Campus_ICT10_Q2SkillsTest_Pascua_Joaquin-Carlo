@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Non-Metal Element Finder</title>
+
+  <!-- ts loads pyscript so python can run in the browser -->
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 400px; margin: 40px auto; padding: 0 16px; }
+    input, button { font-size: 1rem; padding: 8px; }
+    #result { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Non-Metal Element Finder</h1>
+
+  <!-- ts is where you type the symbol -->
+  <input id="symbol" type="text" placeholder="Enter symbol (ex: O)">
+
+  <!-- ts calls the search function in main.py -->
+  <button py-click="search">Search</button>
+
+  <!-- ts is where the answer shows up -->
+  <div id="result"></div>
+
+  <!-- ts connects the python file -->
+  <script type="py" src="./main.py"></script>
+</body>
+</html>
